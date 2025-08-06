@@ -8,12 +8,12 @@ namespace EMS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdmitCardController : ControllerBase
+    public class SchoolClassSubjectController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private Modelmessage message;
 
-        public AdmitCardController(IUnitOfWork unitOfWork)
+        public SchoolClassSubjectController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;           // loosely coupled
             message = new Modelmessage();       // tightly coupled
@@ -21,16 +21,16 @@ namespace EMS.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public Task<IEnumerable<AdmitCard>> Get()
+        public Task<IEnumerable<SchoolClassSubject>> Get()
         {
-            return _unitOfWork.AdmitCardRepo.GetAll();
+            return _unitOfWork.SchoolClassSubjectRepo.GetAll();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var user = await _unitOfWork.AdmitCardRepo.GetById(id);
+            var user = await _unitOfWork.SchoolClassSubjectRepo.GetById(id);
             if (user == null)
                 return NotFound($"User with ID = {id} not found");
 
@@ -39,9 +39,9 @@ namespace EMS.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public IActionResult Post(AdmitCard entity)
+        public IActionResult Post(SchoolClassSubject entity)
         {
-            _unitOfWork.AdmitCardRepo.Add(entity);
+            _unitOfWork.SchoolClassSubjectRepo.Add(entity);
             message = _unitOfWork.Save();
 
             if (message.IsSucces)
@@ -52,17 +52,16 @@ namespace EMS.Controllers
 
         // PUT: api/AdmitCard/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, AdmitCard entity)
+        public async Task<IActionResult> Put(int id, SchoolClassSubject entity)
         {
-            var existing = await _unitOfWork.AdmitCardRepo.GetById(id);
+            var existing = await _unitOfWork.SchoolClassSubjectRepo.GetById(id);
             if (existing == null)
                 return NotFound($"User with ID = {id} not found");
 
             // Update necessary fields
-            existing.StudentId = entity.StudentId;
-            existing.ExamId = entity.ExamId;
-            existing.AdmitCardPath = entity.AdmitCardPath;
-            existing.IssuedDate = entity.IssuedDate;
+            existing.SchoolClassId = entity.SchoolClassId;
+            existing.SubjectId = entity.SubjectId;
+           
 
             //base class fields
             existing.CreatedBy = entity.CreatedBy;
@@ -74,7 +73,7 @@ namespace EMS.Controllers
 
             // Add more field updates as required
 
-            _unitOfWork.AdmitCardRepo.Update(existing);
+            _unitOfWork.SchoolClassSubjectRepo.Update(existing);
             message = _unitOfWork.Save();
 
             if (message.IsSucces)
@@ -87,11 +86,11 @@ namespace EMS.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var existing = await _unitOfWork.AdmitCardRepo.GetById(id);
+            var existing = await _unitOfWork.SchoolClassSubjectRepo.GetById(id);
             if (existing == null)
                 return NotFound($"User with ID = {id} not found");
 
-            _unitOfWork.AdmitCardRepo.Delete(existing);
+            _unitOfWork.SchoolClassSubjectRepo.Delete(existing);
             message = _unitOfWork.Save();
 
             if (message.IsSucces)

@@ -8,12 +8,12 @@ namespace EMS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdmitCardController : ControllerBase
+    public class SalaryController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private Modelmessage message;
 
-        public AdmitCardController(IUnitOfWork unitOfWork)
+        public SalaryController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;           // loosely coupled
             message = new Modelmessage();       // tightly coupled
@@ -21,16 +21,16 @@ namespace EMS.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public Task<IEnumerable<AdmitCard>> Get()
+        public Task<IEnumerable<Salary>> Get()
         {
-            return _unitOfWork.AdmitCardRepo.GetAll();
+            return _unitOfWork.SalaryRepo.GetAll();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var user = await _unitOfWork.AdmitCardRepo.GetById(id);
+            var user = await _unitOfWork.SalaryRepo.GetById(id);
             if (user == null)
                 return NotFound($"User with ID = {id} not found");
 
@@ -39,9 +39,9 @@ namespace EMS.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public IActionResult Post(AdmitCard entity)
+        public IActionResult Post(Salary entity)
         {
-            _unitOfWork.AdmitCardRepo.Add(entity);
+            _unitOfWork.SalaryRepo.Add(entity);
             message = _unitOfWork.Save();
 
             if (message.IsSucces)
@@ -50,19 +50,29 @@ namespace EMS.Controllers
                 return Problem(message.Message);
         }
 
-        // PUT: api/AdmitCard/5
+        // PUT: api/Salary/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, AdmitCard entity)
+        public async Task<IActionResult> Put(int id, Salary entity)
         {
-            var existing = await _unitOfWork.AdmitCardRepo.GetById(id);
+            var existing = await _unitOfWork.SalaryRepo.GetById(id);
             if (existing == null)
                 return NotFound($"User with ID = {id} not found");
 
             // Update necessary fields
-            existing.StudentId = entity.StudentId;
-            existing.ExamId = entity.ExamId;
-            existing.AdmitCardPath = entity.AdmitCardPath;
-            existing.IssuedDate = entity.IssuedDate;
+            existing.UserId = entity.UserId;
+            existing.User = entity.User;
+            existing.Year = entity.Year;
+            existing.Month = entity.Month;
+            existing.BasicSalary = entity.BasicSalary;
+            existing.Allowance = entity.Allowance;
+            existing.Bonus = entity.Bonus;
+            existing.OvertimeAmount = entity.OvertimeAmount;
+            existing.PermittedLeaveDays = entity.PermittedLeaveDays;
+            existing.TotalLeaveDays = entity.TotalLeaveDays;
+            existing.LeaveDeduction = entity.LeaveDeduction;
+            //existing.NetSalary = entity.NetSalary;
+            existing.PaymentDate = entity.PaymentDate;
+            existing.PaymentMethod = entity.PaymentMethod;
 
             //base class fields
             existing.CreatedBy = entity.CreatedBy;
@@ -74,7 +84,7 @@ namespace EMS.Controllers
 
             // Add more field updates as required
 
-            _unitOfWork.AdmitCardRepo.Update(existing);
+            _unitOfWork.SalaryRepo.Update(existing);
             message = _unitOfWork.Save();
 
             if (message.IsSucces)
@@ -87,11 +97,11 @@ namespace EMS.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var existing = await _unitOfWork.AdmitCardRepo.GetById(id);
+            var existing = await _unitOfWork.SalaryRepo.GetById(id);
             if (existing == null)
                 return NotFound($"User with ID = {id} not found");
 
-            _unitOfWork.AdmitCardRepo.Delete(existing);
+            _unitOfWork.SalaryRepo.Delete(existing);
             message = _unitOfWork.Save();
 
             if (message.IsSucces)
