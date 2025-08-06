@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseClass_dll
@@ -6,6 +7,7 @@ namespace BaseClass_dll
     public class Salary : BaseEntity
     {
         public int UserId { get; set; }
+        [ValidateNever]
         public User User { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }

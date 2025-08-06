@@ -1,5 +1,6 @@
 ﻿using static System.Collections.Specialized.BitVector32;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace BaseClass_dll
 {
@@ -15,12 +16,19 @@ namespace BaseClass_dll
         public int SectionId { get; set; }
         public string? PreviousSchool { get; set; }
         public DateTime AdmissionDate { get; set; }
+        [ValidateNever]
         public User User { get; set; }
+        [ValidateNever]
         public AcademyClass AcademyClass { get; set; }
+        [ValidateNever]
         public Section Section { get; set; }
+        [ValidateNever]
         public ICollection<Attendance> Attendances { get; set; }
+        [ValidateNever]
         public ICollection<HomeworkSubmission> HomeworkSubmissions { get; set; }
+        [ValidateNever]
         public ICollection<Result> Results { get; set; }
+        [ValidateNever]
         public ICollection<FeePayment> FeePayments { get; set; }
     }
 

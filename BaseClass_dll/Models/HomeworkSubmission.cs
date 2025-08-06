@@ -1,4 +1,6 @@
-﻿namespace BaseClass_dll
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace BaseClass_dll
 {
     public class HomeworkSubmission : BaseEntity
     {
@@ -9,8 +11,10 @@
         public string FilePath { get; set; }
         public List<string> IFromFilePaths { get; set; }
         public string Feedback { get; set; }
+        [ValidateNever]
 
         public Homework Homework { get; set; }
+        [ValidateNever]
         public Student Student { get; set; }
     }
 

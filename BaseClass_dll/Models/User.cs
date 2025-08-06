@@ -1,4 +1,6 @@
-﻿namespace BaseClass_dll
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace BaseClass_dll
 {
     public class User : BaseEntity
     {
@@ -11,8 +13,11 @@
         //public bool IsActive { get; set; }
 
         public DateTime CreatedAt { get; set; }
+        [ValidateNever]
         public Student? Student { get; set; }
+        [ValidateNever]
         public Parent? Parent { get; set; }
+        [ValidateNever]
         public Teacher? Teacher { get; set; }
     }
 

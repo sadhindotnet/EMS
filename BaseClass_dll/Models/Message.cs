@@ -1,4 +1,6 @@
-﻿namespace BaseClass_dll
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace BaseClass_dll
 {
     public class Message : BaseEntity
     {
@@ -7,8 +9,10 @@
         public string Subject { get; set; }
         public string Body { get; set; }
         public DateTime SentAt { get; set; }
+        [ValidateNever]
 
         public User Sender { get; set; }
+        [ValidateNever]
         public User Receiver { get; set; }
     }
 

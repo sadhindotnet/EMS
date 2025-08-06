@@ -1,4 +1,6 @@
-﻿namespace BaseClass_dll
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace BaseClass_dll
 {
     public class Event : BaseEntity
     {
@@ -12,7 +14,7 @@
         public string Location { get; set; }
 
         public string TargetAudience { get; set; } // All, Teachers, Students, Parents
-
+        [ValidateNever]
         public ICollection<EventImage> Images { get; set; }
     }
 

@@ -1,4 +1,6 @@
-﻿namespace BaseClass_dll
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace BaseClass_dll
 {
     public class FeePayment : BaseEntity
     {
@@ -9,7 +11,9 @@
         public DateTime PaymentDate { get; set; }
         public string PaymentMethod { get; set; }
         public string TransactionId { get; set; }
+        [ValidateNever]
         public Student Student { get; set; }
+        [ValidateNever]
         public FeeStructure FeeStructure { get; set; }
     }
 

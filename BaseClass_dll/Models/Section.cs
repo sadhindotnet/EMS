@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Security.Claims;
 
 namespace BaseClass_dll
 {
@@ -7,6 +8,7 @@ namespace BaseClass_dll
         public string Name { get; set; } // e.g., "A", "B"
 
         public int AcademyClassId { get; set; }
+        [ValidateNever]
         public AcademyClass AcademyClass { get; set; }
     }
 

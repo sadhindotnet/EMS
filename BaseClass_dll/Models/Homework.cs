@@ -1,4 +1,6 @@
-﻿namespace BaseClass_dll
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace BaseClass_dll
 {
     public class Homework : BaseEntity
     {
@@ -10,9 +12,13 @@
         public string Description { get; set; }
         public DateTime AssignedDate { get; set; }
         public DateTime DueDate { get; set; }
+        [ValidateNever]
         public Subject Subject { get; set; }
+        [ValidateNever]
         public Teacher Teacher { get; set; }
+        [ValidateNever]
         public AcademyClass AcademyClass { get; set; }
+        [ValidateNever]
         public ICollection<HomeworkSubmission> Submissions { get; set; }
     }
 
